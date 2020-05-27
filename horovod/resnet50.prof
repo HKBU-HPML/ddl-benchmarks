@@ -1,0 +1,176 @@
+==31215== NVPROF is profiling process 31215, command: python imagenet_benchmark.py --batch-size 64 --num-warmup-batches 0 --num-iters 1
+==31215== Profiling application: python imagenet_benchmark.py --batch-size 64 --num-warmup-batches 0 --num-iters 1
+==31215== Profiling result:
+==31215== Metric result:
+Invocations                               Metric Name                        Metric Description         Min         Max         Avg
+Device "Tesla V100-PCIE-32GB (0)"
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZNS0_21threshold_kernel_implIfEEvRNS_14TensorIteratorET_S6_EUlffE_EEvS5_RKS6_EUliE0_EEviT1_
+        980                                inst_fp_32                   FP Instructions(Single)     1605632    51380224    12550144
+    Kernel: void cudnn::winograd_nonfused::winogradForwardOutput4x4<float, float>(cudnn::winograd_nonfused::WinogradOutputParams<float, float>)
+        218                                inst_fp_32                   FP Instructions(Single)    55902208   219185152   122376605
+    Kernel: void flip_filter<float, float>(float*, float const *, int, int, int, int)
+        162                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void cudnn::winograd_nonfused::winogradWgradDelta4x4<float, float>(cudnn::winograd_nonfused::WinogradDeltaParams<float, float>)
+         54                                inst_fp_32                   FP Instructions(Single)    15335424    93929472    35232426
+    Kernel: void cudnn::winograd_nonfused::winogradWgradData4x4<float, float>(cudnn::winograd_nonfused::WinogradDataParams<float, float>)
+         54                                inst_fp_32                   FP Instructions(Single)    24379392   149323776    56010524
+    Kernel: void _GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::softmax_warp_backward<float, float, float, int=10, bool=1>(float*, float const *, float const , int, int, int)
+         10                                inst_fp_32                   FP Instructions(Single)      969728      969728      969728
+    Kernel: void at::native::reduce_kernel<int=512, at::native::ReduceOp<float, at::native::MeanOps<float, float>, unsigned int, float, int=4>>(float)
+         10                                inst_fp_32                   FP Instructions(Single)    58851328    58851328    58851328
+    Kernel: void cudnn::detail::explicit_convolve_sgemm<float, int, int=1024, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=1024, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+         24                                inst_fp_32                   FP Instructions(Single)   847773696  7912554496  3574136832
+    Kernel: void _GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::softmax_warp_forward<float, float, float, int=10, bool=1>(float*, float const *, int, int, int)
+         10                                inst_fp_32                   FP Instructions(Single)     1242624     1242624     1242624
+    Kernel: void cunn_ClassNLLCriterion_updateGradInput_kernel<float>(float*, float*, long*, float*, float*, int, int, int, int, long)
+         10                                inst_fp_32                   FP Instructions(Single)         288         288         288
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZNS0_23gpu_kernel_with_scalarsIZZZNS0_15add_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE4_clEvEUlllE_EEvS5_RKT_EUllE0_EEvS5_SD_EUliE2_EEviT1_
+        530                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: volta_scudnn_128x32_relu_interior_nn_v1
+          1                                inst_fp_32                   FP Instructions(Single)  6596036608  6596036608  6596036608
+    Kernel: cudnn::gemm::computeBOffsetsKernel(cudnn::gemm::ComputeBOffsetsParams)
+        346                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void cudnn::detail::wgrad_alg0_engine<float, int=512, int=6, int=5, int=3, int=3, int=3, bool=1, int=512>(int, int, int, float const *, int, cudnn::detail::wgrad_alg0_engine<float, int=512, int=6, int=5, int=3, int=3, int=3, bool=1, int=512>*, float const , kernel_grad_params, int, float, int, int, int, int)
+         48                                inst_fp_32                   FP Instructions(Single)   823975936  9880670208  4495775061
+    Kernel: cudnn::gemm::computeWgradBOffsetsKernel(cudnn::gemm::ComputeBOffsetsParams)
+        116                                inst_fp_32                   FP Instructions(Single)          14         112          20
+    Kernel: void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)
+        216                                inst_fp_32                   FP Instructions(Single)        4096    51380224    10376696
+    Kernel: volta_scudnn_128x64_stridedB_interior_nn_v1
+        342                                inst_fp_32                   FP Instructions(Single)   835129344  6628851712  3550868252
+    Kernel: void cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=6, int=7, int=3, int=3, int=5, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=6, int=7, int=3, int=3, int=5, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+         99                                inst_fp_32                   FP Instructions(Single)  3291545600  7411597312  5581339017
+    Kernel: volta_sgemm_128x32_nt
+         10                                inst_fp_32                   FP Instructions(Single)   136445952   136445952   136445952
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_15add_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS4_RKT_EUliE0_EEviT1_
+       3701                                inst_fp_32                   FP Instructions(Single)          64    51380224     2071252
+    Kernel: volta_scudnn_128x128_stridedB_splitK_interior_nn_v1
+         78                                inst_fp_32                   FP Instructions(Single)  3295731712  6606258176  4147809148
+    Kernel: void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=6, int=5, int=4, int=4, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=6, int=5, int=4, int=4, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)
+          1                                inst_fp_32                   FP Instructions(Single)  8420614144  8420614144  8420614144
+    Kernel: volta_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148t_nt_v1
+          8                                inst_fp_32                   FP Instructions(Single)  4141613056  9169272832  5641273344
+    Kernel: volta_scudnn_128x128_relu_interior_nn_v1
+         53                                inst_fp_32                   FP Instructions(Single)  3298018304  6654140416  3423933555
+    Kernel: cudnn::gemm::computeOffsetsKernel(cudnn::gemm::ComputeOffsetsParams)
+        589                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>(cudnnTensorStruct, float const *, cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>, cudnnTensorStruct*, float const *, float const , float, float, float*, float const *, float const *, float const *, float, float, cudnn::reduced_divisor, int, float*, cudnn::detail::bnFwPersistentState*, int, float, float, float, int, float, float, cudnnStatus_t*, bool)
+         90                                inst_fp_32                   FP Instructions(Single)    10786816    43147264    25169237
+    Kernel: volta_scudnn_128x128_relu_small_nn_v1
+          1                                inst_fp_32                   FP Instructions(Single)  7418120192  7418120192  7418120192
+    Kernel: void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+         33                                inst_fp_32                   FP Instructions(Single)    64643072   537264128   203509139
+    Kernel: void cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1>(float, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1>, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1>, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1>, cudnnTensorStruct, float const *, float, float const , float, cudnnTensorStruct*, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1> const *, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1>*, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1> const *, cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1> const , cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1> const , cudnn::detail::bn_bw_1C11_kernel_new<float, float, float2, int=512, bool=1, int=1>)
+        440                                inst_fp_32                   FP Instructions(Single)    32525312   490032128   149210699
+    Kernel: void cudnn::detail::wgrad_alg0_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1, int=512>(int, int, int, float const *, int, cudnn::detail::wgrad_alg0_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1, int=512>*, float const , kernel_grad_params, int, float, int, int, int, int)
+        270                                inst_fp_32                   FP Instructions(Single)  3295789056  8609071104  4269487748
+    Kernel: void cudnn::detail::bn_bw_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>(float, float, float, float, cudnnTensorStruct, float const *, cudnn::detail::bn_bw_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>, float const , cudnn::detail::bn_bw_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>, cudnnTensorStruct*, float const *, float*, float const *, float const , float const , float, cudnn::reduced_divisor, int, float*, cudnn::detail::bnBwPersistentState*, int, float, float, float, int, float, cudnnStatus_t*, bool)
+         90                                inst_fp_32                   FP Instructions(Single)    14258176    57032704    33269077
+    Kernel: void cudnn::detail::dgrad_engine<float, int=128, int=6, int=7, int=3, int=3, int=5, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=128, int=6, int=7, int=3, int=3, int=5, bool=1>*, kernel_grad_params, int, int, float, int, int, int)
+         43                                inst_fp_32                   FP Instructions(Single)   851705856  8512151552  6775085770
+    Kernel: volta_sgemm_128x32_sliced1x4_tn
+         10                                inst_fp_32                   FP Instructions(Single)   138956800   138956800   138956800
+    Kernel: void cunn_ClassNLLCriterion_updateOutput_kernel<float, float>(float*, float*, float*, long*, float*, int, int, int, int, long)
+         10                                inst_fp_32                   FP Instructions(Single)         203         203         203
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_15div_kernel_cudaERNS_14TensorIteratorEENKUlvE_clEvENKUlvE0_clEvEUlfE_EEvS4_RKT_EUliE1_EEviT1_
+         10                                inst_fp_32                   FP Instructions(Single)     6422528     6422528     6422528
+    Kernel: void fft2d_r2c_64x64<float>(float2*, float const *, int, int, int, int, int, int, int, int)
+         90                                inst_fp_32                   FP Instructions(Single)   414973952  3319791616   627071749
+    Kernel: volta_scudnn_128x64_stridedB_splitK_medium_nn_v1
+          2                                inst_fp_32                   FP Instructions(Single)  8225459200  8225459200  8225459200
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_16fill_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlvE_EEvS4_RKT_EUliE2_EEviT1_
+         10                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+         64                                inst_fp_32                   FP Instructions(Single)  3291545600  7411597312  6367434752
+    Kernel: volta_sgemm_64x32_sliced1x4_nn
+         10                                inst_fp_32                   FP Instructions(Single)   135151616   135151616   135151616
+    Kernel: void at::native::_GLOBAL__N__63_tmpxft_00007eee_00000000_11_DilatedMaxPool2d_compute_75_cpp1_ii_db999de0::max_pool_forward_nchw<float, float>(int, float const *, int, int, int, int, int, int, int, int, int, int, int, int, int, int, at::native::_GLOBAL__N__63_tmpxft_00007eee_00000000_11_DilatedMaxPool2d_compute_75_cpp1_ii_db999de0::max_pool_forward_nchw<float, float>*, long*)
+         10                                inst_fp_32                   FP Instructions(Single)   254156800   254156800   254156800
+    Kernel: volta_scudnn_128x64_stridedB_small_nn_v1
+          4                                inst_fp_32                   FP Instructions(Single)  7402013696  7551411200  7442624512
+    Kernel: void cudnn::detail::bn_fw_tr_1C11_kernel_NCHW<float, float, int=512, bool=1, int=1>(cudnnTensorStruct, float const *, cudnn::detail::bn_fw_tr_1C11_kernel_NCHW<float, float, int=512, bool=1, int=1>, cudnnTensorStruct*, float const *, float const , cudnnTensorStruct*, cudnnTensorStruct*, cudnnTensorStruct**, float const *, float const *, float const *, cudnnTensorStruct*, cudnnTensorStruct*)
+        440                                inst_fp_32                   FP Instructions(Single)    48399104   746947328   225961200
+    Kernel: volta_cgemm_32x32_tn
+        176                                inst_fp_32                   FP Instructions(Single)  2249736192  3.8731e+10  4873529530
+    Kernel: volta_scudnn_128x64_relu_small_nn_v1
+          6                                inst_fp_32                   FP Instructions(Single)  7408436224  7554688000  7463642794
+    Kernel: void cudnn::detail::implicit_convolve_sgemm<float, float, int=1024, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=1024, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+         62                                inst_fp_32                   FP Instructions(Single)   847773696  7912554496  3137508517
+    Kernel: void fft2d_r2c_32x32<float, bool=0, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+        112                                inst_fp_32                   FP Instructions(Single)     3290112   561512448    62541504
+    Kernel: void fft1d_r2c_32<float, float, float2, bool=0, bool=0>(float2*, float const *, int, int3, int3, int2, int2)
+         44                                inst_fp_32                   FP Instructions(Single)     1167360   298844160   138411752
+    Kernel: void fft1d_r2c_32<float, float, float2, bool=1, bool=0>(float2*, float const *, int, int3, int3, int2, int2)
+         12                                inst_fp_32                   FP Instructions(Single)     1167360   298844160    82590720
+    Kernel: void im2col4d_kernel<float, int>(im2col4d_params, cudnnConvolutionStruct, cudnnTensor4dStruct, float const *, float*, int)
+        123                                inst_fp_32                   FP Instructions(Single)       29568     2408960      425976
+    Kernel: void cudnn::winograd_nonfused::winogradForwardData4x4<float, float>(cudnn::winograd_nonfused::WinogradDataParams<float, float>)
+        218                                inst_fp_32                   FP Instructions(Single)    23592960   144506880    77448220
+    Kernel: void at::native::_GLOBAL__N__63_tmpxft_00007eee_00000000_11_DilatedMaxPool2d_compute_75_cpp1_ii_db999de0::max_pool_backward_nchw<float, float>(int, float const *, long const *, int, int, int, int, int, int, int, int, int, int, int, int, int, int, at::native::_GLOBAL__N__63_tmpxft_00007eee_00000000_11_DilatedMaxPool2d_compute_75_cpp1_ii_db999de0::max_pool_backward_nchw<float, float>*)
+         10                                inst_fp_32                   FP Instructions(Single)   370671616   370671616   370671616
+    Kernel: void fft2d_c2r_32x32<float, bool=1, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+         87                                inst_fp_32                   FP Instructions(Single)    51838976   397705216    70657224
+    Kernel: void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=1, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+          9                                inst_fp_32                   FP Instructions(Single)   268435456  2142633984   748217230
+    Kernel: compute_gemm_pointers(float2**, float2 const *, int, float2 const *, int, float2 const *, int, int)
+        178                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: _ZN2at6native13reduce_kernelILi512ENS0_8ReduceOpIfNS0_14func_wrapper_tIfZNS0_15sum_kernel_implIfffEEvRNS_14TensorIteratorEEUlffE_EEjfLi4EEEEEvT0_
+         10                                inst_fp_32                   FP Instructions(Single)       67000       67000       67000
+    Kernel: void cudnn::detail::dgrad_engine<float, int=512, int=6, int=5, int=3, int=3, int=3, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=512, int=6, int=5, int=3, int=3, int=3, bool=1>*, kernel_grad_params, int, int, float, int, int, int)
+         31                                inst_fp_32                   FP Instructions(Single)  4296572928  9676783616  8528362462
+    Kernel: void cudnn::winograd_nonfused::winogradWgradOutput4x4<float, float>(cudnn::winograd_nonfused::WinogradWgradOutputParams<float, float>)
+         54                                inst_fp_32                   FP Instructions(Single)      299008    19136512     8222720
+    Kernel: void cudnn::detail::wgrad_alg0_engine<float, int=128, int=6, int=7, int=3, int=3, int=5, bool=1, int=512>(int, int, int, float const *, int, cudnn::detail::wgrad_alg0_engine<float, int=128, int=6, int=7, int=3, int=3, int=5, bool=1, int=512>*, float const , kernel_grad_params, int, float, int, int, int, int)
+         58                                inst_fp_32                   FP Instructions(Single)  3296985088  7418216448  4973452464
+    Kernel: void fft2d_c2r_64x64<float, bool=0>(float*, float2*, int, int, int, int, int, int, int, int, int, int, float, float, int, float*, float*)
+         45                                inst_fp_32                   FP Instructions(Single)   400826368  3206610944   617152512
+    Kernel: void fft1d_c2r_32<float2, float, float, bool=0, bool=1, bool=0, bool=0>(float*, float2 const *, int, int3, int3, int2, int, float, float, float*, float*)
+         32                                inst_fp_32                   FP Instructions(Single)    61243392   279838720   162469888
+    Kernel: volta_gcgemm_32x32_nt
+        135                                inst_fp_32                   FP Instructions(Single)    70328320  2.8357e+10  2906051288
+    Kernel: volta_sgemm_128x64_nn
+         84                                inst_fp_32                   FP Instructions(Single)  1879041024  2425503744  2029589430
+    Kernel: void fft2d_r2c_16x16<float>(float2*, float const *, int, int, int, int, int, int, int, int)
+        242                                inst_fp_32                   FP Instructions(Single)    54919168  3514826752   194713413
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_16fill_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlvE_EEvS4_RKT_EUliE0_EEviT1_
+       1781                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: volta_sgemm_128x64_nt
+        188                                inst_fp_32                   FP Instructions(Single)  1850287104  3699675648  2160495580
+    Kernel: cudnn::gemm::computeWgradSplitKOffsetsKernel(cudnn::gemm::ComputeOffsetsParams)
+        116                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: volta_cgemm_64x32_tn
+          2                                inst_fp_32                   FP Instructions(Single)  3.9268e+10  3.9268e+10  3.9268e+10
+    Kernel: volta_scudnn_128x64_stridedB_splitK_small_nn_v1
+         22                                inst_fp_32                   FP Instructions(Single)  7407074304  7432040448  7424474949
+    Kernel: void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)
+          1                                inst_fp_32                   FP Instructions(Single)  9989505024  9989505024  9989505024
+    Kernel: volta_scudnn_128x128_stridedB_splitK_xregs_large_nn_v1
+          2                                inst_fp_32                   FP Instructions(Single)  2.6314e+10  2.6314e+10  2.6314e+10
+    Kernel: void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+         30                                inst_fp_32                   FP Instructions(Single)    70189056  4492099584  1162798694
+    Kernel: void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+         16                                inst_fp_32                   FP Instructions(Single)   140378112   561512448   263208960
+    Kernel: void cudnn::winograd_nonfused::winogradForwardFilter4x4<float, float>(cudnn::winograd_nonfused::WinogradFilterParams<float, float>)
+        218                                inst_fp_32                   FP Instructions(Single)      221184    14155776     3885939
+    Kernel: void cudnn::winograd::generateWinogradTilesKernel<int=0, float, float>(cudnn::winograd::GenerateWinogradTilesParams<float, float>)
+          8                                inst_fp_32                   FP Instructions(Single)      204800    13107200     4352000
+    Kernel: void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=4, int=6, int=3, int=2, int=4, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=4, int=6, int=3, int=2, int=4, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)
+          1                                inst_fp_32                   FP Instructions(Single)  1.7210e+10  1.7210e+10  1.7210e+10
+    Kernel: volta_scudnn_128x64_relu_interior_nn_v1
+        171                                inst_fp_32                   FP Instructions(Single)   860819456  6730649600  3592489181
+    Kernel: void fft2d_c2r_16x16<float, bool=0>(float*, float2*, int, int, int, int, int, int, int, int, int, int, float, float, int, float*, float*)
+        121                                inst_fp_32                   FP Instructions(Single)    65077248  3551526912   237712070
+    Kernel: void cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>*, kernel_grad_params, int, int, float, int, int, int)
+         23                                inst_fp_32                   FP Instructions(Single)  4298178560  9691217920  8040539180
+    Kernel: volta_scudnn_128x64_stridedB_splitK_interior_nn_v1
+         12                                inst_fp_32                   FP Instructions(Single)  1645091840  6580367360  4113346048
+    Kernel: volta_gcgemm_64x32_nt
+         14                                inst_fp_32                   FP Instructions(Single)  3159482368  2.4559e+10  1.0584e+10
+    Kernel: volta_scudnn_128x64_relu_medium_nn_v1
+         11                                inst_fp_32                   FP Instructions(Single)  7964737536  7964737536  7964737536
+    Kernel: void transpose_readWrite_alignment_kernel<float2, float2, int=1, bool=0, int=6, int=4, int=4>(cublasTransposeParams<float2>, float2 const *, float2*, float2 const *)
+        135                                inst_fp_32                   FP Instructions(Single)    34603008   276824064    52288989
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_21copy_device_to_deviceERNS_14TensorIteratorEbENKUlvE_clEvENKUlvE2_clEvEUlfE_EEvS4_RKT_EUliE2_EEviT1_
+         10                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=1>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+          8                                inst_fp_32                   FP Instructions(Single)     3290112  4492099584  1483155072

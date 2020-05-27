@@ -1,0 +1,106 @@
+==31365== NVPROF is profiling process 31365, command: python bert_benchmark.py --batch-size 8 --num-warmup-batches 0 --num-iters 1
+==31365== Profiling application: python bert_benchmark.py --batch-size 8 --num-warmup-batches 0 --num-iters 1
+==31365== Profiling result:
+==31365== Metric result:
+Invocations                               Metric Name                        Metric Description         Min         Max         Avg
+Device "Tesla V100-PCIE-32GB (0)"
+    Kernel: void _GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::softmax_warp_backward<float, float, float, int=1, bool=1>(float*, float const *, float const , int, int, int)
+         11                                inst_fp_32                   FP Instructions(Single)         240         240         240
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_15mul_kernel_cudaERNS_14TensorIteratorEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS4_RKT_EUliE0_EEviT1_
+        264                                inst_fp_32                   FP Instructions(Single)      524288      524288      524288
+    Kernel: void at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::LayerNormBackwardCUDAKenrel<float>(long, float const *, float const , float const , float const , at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::LayerNormBackwardCUDAKenrel<float>, bool=1>::type const *, at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::LayerNormBackwardCUDAKenrel<float>, bool=1>::type const , at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::LayerNormBackwardCUDAKenrel<float>*)
+        550                                inst_fp_32                   FP Instructions(Single)     2097152     2097152     2097152
+    Kernel: void _GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::softmax_warp_backward<float, float, float, int=6, bool=0>(float*, float const *, float const , int, int, int)
+        264                                inst_fp_32                   FP Instructions(Single)     2097152     2097152     2097152
+    Kernel: void at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::GammaBetaBackwardCUDAKernel<float>(long, long, float const *, float const , float const , float const , at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::GammaBetaBackwardCUDAKernel<float>*, float const *)
+        550                                inst_fp_32                   FP Instructions(Single)     2917376     2917376     2917376
+    Kernel: _ZN2at4cuda78_GLOBAL__N__54_tmpxft_00007fa7_00000000_11_Dropout_compute_75_cpp1_ii_275f3a0521kernelPointwiseApply3IZNS_6native78_GLOBAL__N__54_tmpxft_00007fa7_00000000_11_Dropout_compute_75_cpp1_ii_275f3a0519masked_scale_kernelIffEEvRNS_6TensorES6_S6_T0_EUlRfRKfhE_ffhjLi1ELi1ELi1ELi1EEEvNS0_6detail10TensorInfoIS8_T3_EENSE_IT1_SF_EENSE_IT2_SF_EESF_T_
+        803                                inst_fp_32                   FP Instructions(Single)     1048576     1048576     1048576
+    Kernel: volta_sgemm_128x64_tn
+        792                                inst_fp_32                   FP Instructions(Single)    68173824  2174844928   770397525
+    Kernel: void cunn_ClassNLLCriterion_updateGradInput_kernel<float>(float*, float*, long*, float*, float*, int, int, int, int, long)
+         22                                inst_fp_32                   FP Instructions(Single)         176        1184         680
+    Kernel: volta_sgemm_128x32_nn
+       1595                                inst_fp_32                   FP Instructions(Single)   543784960  2149711872  1075304518
+    Kernel: volta_sgemm_128x32_nt
+         11                                inst_fp_32                   FP Instructions(Single)     9502720     9502720     9502720
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_15add_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS4_RKT_EUliE0_EEviT1_
+      10782                                inst_fp_32                   FP Instructions(Single)           2    31260672      827766
+    Kernel: void kernelPointwiseApply3<tanh_updateGradInput_functor<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<tanh_updateGradInput_functor<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+         11                                inst_fp_32                   FP Instructions(Single)       16384       16384       16384
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_15div_kernel_cudaERNS_14TensorIteratorEENKUlvE_clEvENKUlvE0_clEvEUlfE_EEvS4_RKT_EUliE_EEviT1_
+        528                                inst_fp_32                   FP Instructions(Single)      524288      524288      524288
+    Kernel: void at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeGradientFusedParamsCUDAKernel<float>(long, long, float const *, float const , at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeGradientFusedParamsCUDAKernel<float>, bool=1>::type const *, at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeGradientFusedParamsCUDAKernel<float>, bool=1>::type const , at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeGradientFusedParamsCUDAKernel<float>, bool=1>*, at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeGradientFusedParamsCUDAKernel<float>, bool=1>::type const *)
+        550                                inst_fp_32                   FP Instructions(Single)        6656        6656        6656
+    Kernel: void at::native::_GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::cunn_SoftMaxBackward<int=2, float, float, float, at::native::_GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::LogSoftMaxBackwardEpilogue>(float*, float*, float, int)
+         11                                inst_fp_32                   FP Instructions(Single)   236044288   236044288   236044288
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_19addcmul_cuda_kernelERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlfffE_EEvS4_RKT_EUliE0_EEviT1_
+       4776                                inst_fp_32                   FP Instructions(Single)           4    62521344     1689609
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZNS0_23gpu_kernel_with_scalarsIZZZNS0_15add_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS5_RKT_EUlfE_EEvS5_SD_EUliE_EEviT1_
+         11                                inst_fp_32                   FP Instructions(Single)         512         512         512
+    Kernel: void at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::RowwiseMomentsCUDAKernel<float>(long, float, at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::RowwiseMomentsCUDAKernel<float> const *, at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::RowwiseMomentsCUDAKernel<float>*, at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::RowwiseMomentsCUDAKernel<float> const *)
+        550                                inst_fp_32                   FP Instructions(Single)     3839488     3839488     3839488
+    Kernel: void at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::LayerNormForwardCUDAKernel<float>(long, float const *, float const , float const , float const , float const , at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::LayerNormForwardCUDAKernel<float>*)
+        550                                inst_fp_32                   FP Instructions(Single)     1572864     1572864     1572864
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZNS0_23gpu_kernel_with_scalarsIZZZNS0_15add_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS5_RKT_EUlfE0_EEvS5_SD_EUliE_EEviT1_
+       4776                                inst_fp_32                   FP Instructions(Single)           2    31260672      844804
+    Kernel: void indexSelectLargeIndex<float, unsigned int, int=2, int=2, int=-2, bool=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, TensorInfo<long, unsigned int>, int, int, unsigned int, unsigned int, long)
+         33                                inst_fp_32                   FP Instructions(Single)     1572864     1572864     1572864
+    Kernel: void _GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::softmax_warp_forward<float, float, float, int=6, bool=0>(float*, float const *, int, int, int)
+        264                                inst_fp_32                   FP Instructions(Single)    17563648    17563648    17563648
+    Kernel: void cunn_ClassNLLCriterion_updateOutput_kernel<float, float>(float*, float*, float*, long*, float*, int, int, int, int, long)
+         22                                inst_fp_32                   FP Instructions(Single)          91        1099         595
+    Kernel: void at::native::_GLOBAL__N__56_tmpxft_00007fd9_00000000_11_Embedding_compute_75_cpp1_ii_9c8c8d3a::embedding_backward_feature_kernel<float, float>(long*, float const *, long**, int, long, int)
+         33                                inst_fp_32                   FP Instructions(Single)      524288      524288      524288
+    Kernel: void _GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::softmax_warp_forward<float, float, float, int=1, bool=1>(float*, float const *, int, int, int)
+         11                                inst_fp_32                   FP Instructions(Single)        4568        4568        4568
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_16fill_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlvE_EEvS4_RKT_EUliE2_EEviT1_
+         11                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void at::native::_GLOBAL__N__54_tmpxft_00007fa7_00000000_11_Dropout_compute_75_cpp1_ii_275f3a05::fused_dropout_kernel<float, float, unsigned int, int=1>(at::cuda::detail::TensorInfo<float, unsigned int>, unsigned int, at::cuda::detail<unsigned char, float>, float, float, std::pair<unsigned long, unsigned long>)
+        803                                inst_fp_32                   FP Instructions(Single)     3047424     3047424     3047424
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_21copy_device_to_deviceERNS_14TensorIteratorEbENKUlvE_clEvENKUlvE2_clEvEUlfE_EEvS4_RKT_EUliE_EEviT1_
+         11                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_21copy_device_to_deviceERNS_14TensorIteratorEbENKUlvE_clEvENKUlvE4_clEvEUllE_EEvS4_RKT_EUliE2_EEviT1_
+         22                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: void at::native::_GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::cunn_SoftMaxForward<int=2, float, float, float, at::native::_GLOBAL__N__54_tmpxft_0000891b_00000000_11_SoftMax_compute_75_cpp1_ii_a3310042::LogSoftMaxForwardEpilogue>(float*, float*, int)
+         11                                inst_fp_32                   FP Instructions(Single)   277299200   277299200   277299200
+    Kernel: _ZN2at6native13reduce_kernelILi512ENS0_8ReduceOpIfNS0_14func_wrapper_tIfZNS0_15sum_kernel_implIfffEEvRNS_14TensorIteratorEEUlffE_EEjfLi4EEEEEvT0_
+       1628                                inst_fp_32                   FP Instructions(Single)          22    17553600     1014038
+    Kernel: volta_sgemm_128x32_tn
+       1342                                inst_fp_32                   FP Instructions(Single)   544997376  1.6056e+10   988975809
+    Kernel: void kernelPointwiseApply2<Tensor_tanh_Float_Op, float, float, unsigned int, int=1, int=1>(OffsetInfo<float, unsigned int, int=1>, OffsetInfo<float, unsigned int, int=1>, unsigned int, Tensor_tanh_Float_Op)
+         11                                inst_fp_32                   FP Instructions(Single)       80746       82676       81742
+    Kernel: void thrust::cuda_cub::core::_kernel_agent<thrust::cuda_cub::__parallel_for::ParallelForAgent<thrust::cuda_cub::__tabulate::functor<thrust::device_ptr<long>, at::native::LinspaceOp<long, long>, long>, long>, thrust::cuda_cub::__tabulate::functor<thrust::device_ptr<long>, at::native::LinspaceOp<long, long>, long>, long>(thrust::device_ptr<long>, long)
+         11                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: volta_sgemm_128x64_nn
+        528                                inst_fp_32                   FP Instructions(Single)    68173824    68173824    68173824
+    Kernel: void gemmSN_TN_kernel<float, int=128, int=16, int=2, int=4, int=8, int=9, bool=0, cublasGemvTensorStridedBatched<float const >, cublasGemvTensorStridedBatched<float>>(cublasGemmSmallNParams<float const , cublasGemvTensorStridedBatched<float const >, float>)
+         22                                inst_fp_32                   FP Instructions(Single)       25858    10093568     5059713
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_16fill_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlvE_EEvS4_RKT_EUliE0_EEviT1_
+       5627                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: volta_sgemm_32x32_sliced1x4_nn
+         11                                inst_fp_32                   FP Instructions(Single)    34054144    34054144    34054144
+    Kernel: volta_sgemm_128x64_nt
+        792                                inst_fp_32                   FP Instructions(Single)    68173824  2160197632   765515093
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZNS0_23gpu_kernel_with_scalarsIZZZNS0_15mul_kernel_cudaERNS_14TensorIteratorEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS5_RKT_EUlfE0_EEvS5_SB_EUliE_EEviT1_
+       9563                                inst_fp_32                   FP Instructions(Single)           2    31260672      843833
+    Kernel: void gemmSN_NN_kernel<float, int=128, int=2, int=4, int=8, int=4, int=4, cublasGemvTensorStridedBatched<float const >, cublasGemvTensorStridedBatched<float>>(cublasGemmSmallNParams<float const , cublasGemvTensorStridedBatched<float const >, float>)
+         11                                inst_fp_32                   FP Instructions(Single)       49408       49408       49408
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_81_GLOBAL__N__57_tmpxft_00007a26_00000000_11_Activation_compute_75_cpp1_ii_150aa41226GeluBackwardCUDAKernelImplERNS_14TensorIteratorEENKUlvE_clEvENKUlvE0_clEvEUlffE_EEvS5_RKT_EUliE0_EEviT1_
+        275                                inst_fp_32                   FP Instructions(Single)    35549151   142252149   137925680
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_16sqrt_kernel_cudaERNS_14TensorIteratorEENKUlvE_clEvENKUlvE0_clEvEUlfE_EEvS4_RKT_EUliE0_EEviT1_
+       4776                                inst_fp_32                   FP Instructions(Single)           0   187564032     4640069
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_19addcdiv_cuda_kernelERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlfffE_EEvS4_RKT_EUliE0_EEviT1_
+       4776                                inst_fp_32                   FP Instructions(Single)          14   343867392     9007012
+    Kernel: volta_sgemm_32x128_nn
+         11                                inst_fp_32                   FP Instructions(Single)  1.6023e+10  1.6023e+10  1.6023e+10
+    Kernel: void at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeInternalGradientsCUDAKernel<float>(long, float const *, float const , float const , at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeInternalGradientsCUDAKernel<float>, bool=1>::type*, at::AccumulateType<at::native::_GLOBAL__N__64_tmpxft_00008ea9_00000000_11_layer_norm_kernel_compute_75_cpp1_ii_de05bf70::ComputeInternalGradientsCUDAKernel<float>, bool=1>::type)
+        550                                inst_fp_32                   FP Instructions(Single)     4358144     4358144     4358144
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_15add_kernel_cudaERNS_14TensorIteratorEN3c106ScalarEENKUlvE_clEvENKUlvE2_clEvEUlffE_EEvS4_RKT_EUliE2_EEviT1_
+       1881                                inst_fp_32                   FP Instructions(Single)           1    15630336      830314
+    Kernel: _ZN2at6native18elementwise_kernelILi512ELi1EZNS0_15gpu_kernel_implIZZZNS0_81_GLOBAL__N__57_tmpxft_00007a26_00000000_11_Activation_compute_75_cpp1_ii_150aa41218GeluCUDAKernelImplERNS_14TensorIteratorEENKUlvE_clEvENKUlvE0_clEvEUlfE_EEvS5_RKT_EUliE0_EEviT1_
+        275                                inst_fp_32                   FP Instructions(Single)    26636255   106600565   103343643
+    Kernel: _ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15gpu_kernel_implIZZZNS0_21copy_device_to_deviceERNS_14TensorIteratorEbENKUlvE_clEvENKUlvE2_clEvEUlfE_EEvS4_RKT_EUliE2_EEviT1_
+       2145                                inst_fp_32                   FP Instructions(Single)           0           0           0
+    Kernel: volta_sgemm_32x128_nt
+       1353                                inst_fp_32                   FP Instructions(Single)     1187840  1.6072e+10   976539681

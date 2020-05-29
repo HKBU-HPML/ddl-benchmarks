@@ -37,6 +37,18 @@ METHOD_NAMES = {
         'optimal': 'Optimal'
         }
 
+CONNECTION_NAMES = {
+        0: '10GbE with TCP/IP',
+        1: '100GbIB with RDMA',
+        2: '100GbE with TCP/IP'
+        }
+
+DNN_NAMES = {
+        'bert': 'BERT-Large',
+        'bert_base': 'BERT-Base',
+        'resnet50': 'ResNet-50',
+        }
+
 METHOD_HACHES = {
         'bspps': '///',
         'bspa2a': '..',
@@ -79,6 +91,7 @@ METHOD_COLORS = {
 
 OUTPUT_PATH = '/media/tmp/ieeenetwork'
 
+# TODO: Should be changed to read from log files
 single_throughputs = {
         'resnet50_64': 253.1,
         'bert_8': 49,
@@ -114,6 +127,41 @@ def autolabel(multi_rects, ax):
         ax.text(rect.get_x() + rect.get_width()/2., height+100.0,
                 '%.1fx' % value,
                 ha='center', va='bottom', rotation=90)
+
+
+def make_markdown_table(array):
+
+    """ Input: Python list with rows of table as lists
+               First element as header. 
+        Output: String to put into a .md file 
+        
+    Ex Input: 
+        [["Name", "Age", "Height"],
+         ["Jake", 20, 5'10],
+         ["Mary", 21, 5'7]] 
+    """
+
+
+    markdown = "\n" + str("| ")
+
+    for e in array[0]:
+        to_add = " " + str(e) + str(" |")
+        markdown += to_add
+    markdown += "\n"
+
+    markdown += '|'
+    for i in range(len(array[0])):
+        markdown += str("-------------- | ")
+    markdown += "\n"
+
+    for entry in array[1:]:
+        markdown += str("| ")
+        for e in entry:
+            to_add = str(e) + str(" | ")
+            markdown += to_add
+        markdown += "\n"
+
+    return markdown + "\n"
 
 
 def read_reports():
@@ -158,20 +206,20 @@ def compare_rdma():
             print(speeds_100GbIB_vs_100GbE)
             print
 
-def plots():
+def plots(rdma, task, OUTPUT_PATH, title=None):
     fig, ax = plt.subplots()
 
     reports = read_reports()
     print
-    rdma = 0
-    tasks = list(reports[rdma].keys())
-    task = tasks[0]
+    #rdma = 0
+    #tasks = list(reports[rdma].keys())
+    #task = tasks[0]
     data = reports[rdma][task]
     #methods = list(data.keys())
     #methods=['bspps', 'bspa2a', 'signum', 'eftopk', 'wfbpps', 'wfbp', 'mgwfbp', 'bytescheduler', 'optimal']
-    methods=['bspps', 'bspa2a', 'wfbpps', 'wfbp', 'mgwfbp', 'byteschedulerps', 'bytescheduler'] #, 'optimal']
-    print('methods: ', methods)
-    ngroups = 4 #len(data[methods[0]])
+    #methods=['bspps', 'bspa2a', 'wfbpps', 'wfbp', 'mgwfbp', 'byteschedulerps', 'bytescheduler'] #, 'optimal']
+    #print('methods: ', methods)
+    ngroups = len(data[methods[0]])
     bar_width = 0.9/len(methods) 
     ind = np.arange(ngroups)
 
@@ -196,6 +244,8 @@ def plots():
     xlabels = tuple([2**(2+g) for g in range(ngroups)])
     ax.set_xticklabels(xlabels, size='x-large')
     ax.legend(tuple([bar[0] for bar in bars]), tuple([METHOD_NAMES[m] for m in methods]), loc=2, ncol=1, fontsize='x-large')
+    if title:
+        ax.set_title(title)
     ax.set_xlabel('# of GPUs')
     ax.set_ylabel('Throughput (Samples per second)')
     print('task: ', task)
@@ -207,8 +257,63 @@ def plots():
         ax.set_ylim(top=9000)
     update_fontsize(ax, 14)
     #plt.show()
-    plt.savefig(os.path.join(OUTPUT_PATH, '%s-rdma%d.pdf'%(task,rdma)), bbox_inches='tight')
+    filename = '%s-rdma%d.png'%(task,rdma)
+    plt.savefig(os.path.join(OUTPUT_PATH, filename), bbox_inches='tight')
+    return filename
+
+def generate_result(folder):
+    """
+    According to the benchmark logs: "exp.log" and "logs/",
+    generate a Markdown file of the throughput to the target directory.
+    """
+    current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    filepath = os.path.join(folder, current_date)
+    if not os.path.isdir(filepath):
+        os.mkdir(filepath)
+
+    table_list = []
+    head = ['DNN', 'BS', 'CONNECTION', 'METHOD', 'Baseline', '1 GPU', ]
+    head = head + ['%d GPUs' % i for i in nworkers]
+    table_list.append(head)
+    reports = init_reports()
+    img_str = '<img src="./%s" align=center/>'
+    images = []
+    for rdma in rdmas:
+        for task in tasks:
+            task_str = '%s_%d' % (task[0], task[1])
+            for method in methods:
+                for nworker in nworkers:
+                    cmd, logfile = gen_cmd(rdma, method, task, nworker)
+                    try:
+                        speed = extract_log(logfile)
+                        #speed_str = '%.3f+-%.3f' % speed
+                    except:
+                        speed_str = (0, 0)
+                    reports[rdma][task_str][method].append(speed)
+                #print('rdma:%d,%s,%s,%s'%(rdma, task_str, method, ','.join(['%.3f+-%.3f'% speed for speed in reports[rdma][task_str][method]])))
+                print('rdma:%d,%s,%s,%s'%(rdma, task_str, method, ','.join(['%.3f'% speed[0] for speed in reports[rdma][task_str][method]])))
+                dnn=task[0]
+                batch_size = task[1]
+                dnn = DNN_NAMES.get(dnn, dnn)
+                row = [dnn, batch_size, CONNECTION_NAMES[rdma], METHOD_NAMES.get(method, method), single_throughputs.get(task_str, '-')] + ['%.3f +- %.2f'% speed for speed in reports[rdma][task_str][method]]
+                table_list.append(row)
+            filename = plots(rdma, task_str, filepath, title='%s (BS=%d) on %s' % (dnn, batch_size, CONNECTION_NAMES[rdma]))
+            images.append(img_str % filename)
+
+    markdown = make_markdown_table(table_list)
+    with open(os.path.join(filepath, 'README.md'), 'w') as f:
+        f.write('# Results generated on %s\n' % current_date)
+        f.write(markdown)
+
+        # write imgs
+        f.write('# Figures\n')
+        f.write('<div align="center">\n')
+        for i in images:
+            f.write('%s\n' % i)
+        f.write('</div>')
+
 
 if __name__ == '__main__':
-    plots()
+    #plots(0, 'resnet50_64', OUTPUT_PATH)
     #compare_rdma()
+    generate_result('./results')

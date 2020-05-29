@@ -8,7 +8,7 @@ import time
 DEBUG=0
 
 LOGPREFIX='pcie'
-a2amethods=['bspa2a', 'wfbp', 'mgwfbp', 'bytescheduler', 'horovod']
+a2amethods=['bspa2a', 'wfbp', 'mgwfbp', 'bytescheduler']
 psmethods=['bspps','wfbpps', 'byteschedulerps']
 methods=a2amethods+psmethods
 tasks=[('resnet50', 64), ('bert', 8), ('bert_base', 64)]

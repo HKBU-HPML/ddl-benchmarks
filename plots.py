@@ -272,7 +272,7 @@ def generate_result(folder):
         os.mkdir(filepath)
 
     table_list = []
-    head = ['DNN', 'BS', 'CONNECTION', 'METHOD', 'Baseline', '1 GPU', ]
+    head = ['DNN', 'BS', 'CONNECTION', 'METHOD', '1 GPU', ]
     head = head + ['%d GPUs' % i for i in nworkers]
     table_list.append(head)
     reports = init_reports()

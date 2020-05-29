@@ -97,14 +97,13 @@ single_throughputs = {
         'bert_8': 49,
         'bert_base_64': 212.8
         }
-candidate_texts = {}
 
 def update_fontsize(ax, fontsize=12.):
     for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
                              ax.get_xticklabels() + ax.get_yticklabels()):
                 item.set_fontsize(fontsize)
 
-def record_rects(rects, task_str):
+def record_rects(rects, task_str, candidate_texts):
     single_throughput = single_throughputs[task_str]
     for i, rect in enumerate(rects):
         height = rect.get_height()
@@ -124,7 +123,7 @@ def autolabel(multi_rects, ax):
         rect = multi_rects[k][1]
         value = multi_rects[k][0] 
         height = rect.get_height()
-        ax.text(rect.get_x() + rect.get_width()/2., height+100.0,
+        ax.text(rect.get_x() + rect.get_width()/2., height*1.03,
                 '%.1fx' % value,
                 ha='center', va='bottom', rotation=90)
 
@@ -224,13 +223,14 @@ def plots(rdma, task, OUTPUT_PATH, title=None):
     ind = np.arange(ngroups)
 
     bars = []
+    candidate_texts = {}
     for i, method in enumerate(methods):
         values = [mean for mean, std in data[method]][:ngroups]
         errs = [std for mean, std in data[method]][:ngroups]
         color = METHOD_COLORS[method]
         hatch = METHOD_HACHES[method]
         bar = ax.bar(ind-bar_width*len(methods)/2, values, bar_width, yerr=errs, color=color, edgecolor='black', hatch=hatch, ecolor='black', capsize=2)
-        record_rects(bar, task)
+        record_rects(bar, task, candidate_texts)
         #bar = ax.bar(ind, values, bar_width, edgecolor='black', hatch=HATCH[i%len(methods)])
         ind = ind + bar_width
         bars.append(bar)
@@ -256,9 +256,9 @@ def plots(rdma, task, OUTPUT_PATH, title=None):
     else:
         ax.set_ylim(top=9000)
     update_fontsize(ax, 14)
-    #plt.show()
     filename = '%s-rdma%d.png'%(task,rdma)
     plt.savefig(os.path.join(OUTPUT_PATH, filename), bbox_inches='tight')
+    #plt.show()
     return filename
 
 def generate_result(folder):
@@ -314,6 +314,6 @@ def generate_result(folder):
 
 
 if __name__ == '__main__':
-    #plots(0, 'resnet50_64', OUTPUT_PATH)
+    #plots(1, 'bert_base_64', OUTPUT_PATH)
     #compare_rdma()
     generate_result('./results')
